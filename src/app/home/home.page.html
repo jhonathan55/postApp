@@ -1,20 +1,82 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-searchbar
+    placeholder="Buscar por nombre"
+    (ionInput)="onSearch($event)"
+  ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <ion-card class="card">
+      <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <ion-card-header>
+          <ion-card-title class="card-title">Crear Post</ion-card-title>
+        </ion-card-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+        <ion-card-content class="card-content">
+          <!-- Campo de name con validación e icono -->
+          <ion-item class="item">
+           
+            <ion-input
+              placeholder="name"
+              label="name"
+              label-placement="floating"
+              fill="solid"
+              formControlName="name"
+              [class]="isValidField('name')"
+            ></ion-input>
+          </ion-item>
+          <ion-text
+            color="danger"
+            *ngIf="postForm.get('name')?.hasError('required') && postForm.get('name')?.touched"
+          >
+            El Post es requerido.
+          </ion-text>
+          <ion-text
+            color="danger"
+            *ngIf="postForm.get('name')?.hasError('name') && postForm.get('name')?.touched"
+          >
+            Debes ingresar un Post válido.
+          </ion-text>
+
+          <!-- Campo de contraseña con validación e icono -->
+          <ion-item class="item">
+           
+            <ion-input
+              placeholder="Descripcion"
+              label="Descripcion"
+              label-placement="floating"
+              fill="solid"
+              type="description"
+              formControlName="description"
+              [class]="isValidField('description')"
+            ></ion-input>
+          </ion-item>
+          <ion-text
+            color="danger"
+            *ngIf="postForm.get('description')?.hasError('required') && postForm.get('description')?.touched"
+          >
+            La Descripcion es requerida.
+          </ion-text>
+
+          <!-- Botón de login mejorado -->
+          <ion-button
+            expand="block"
+            type="submit"
+            color="primary"
+            class="login-button"
+            [disabled]="postForm.invalid"
+          >
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+           Crear Post
+          </ion-button>
+        </ion-card-content>
+      </form>
+    </ion-card>
+
+    <app-post-list></app-post-list>
+</ion-content>
+
 </ion-content>

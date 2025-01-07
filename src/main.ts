@@ -4,11 +4,18 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+import { provideStore } from '@ngrx/store';
+import { postReducer } from './app/store/post.reducer';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-  ],
+    provideStore({
+      posts: postReducer
+    }),
+    provideStoreDevtools()
+],
 });
