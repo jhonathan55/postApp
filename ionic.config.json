@@ -1,0 +1,7 @@
+{
+  "name": "postApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
