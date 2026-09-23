@@ -1,7 +1,7 @@
 {
   "name": "postApp",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Jhonathan Gutierrez",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,13 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "build:web": "ng build",
+    "android:prepare": "npm run build:web && npx cap sync android",
+    "android:open": "npx cap open android",
+    "android:run": "npm run android:prepare && npx cap run android",
+    "android:apk": "npm run android:prepare && npx cap build android --androidreleasetype APK",
+    "android:aab": "npm run android:prepare && npx cap build android --androidreleasetype AAB"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +27,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "@capacitor/android": "6.2.0",
     "@capacitor/app": "6.0.2",
     "@capacitor/core": "6.2.0",
     "@capacitor/haptics": "6.0.2",
